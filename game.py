@@ -30,6 +30,9 @@ class Game:
             self.field_data)
 
         #  timer
+        self.down_speed = UPDATE_START_SPEED
+        self.down_speed_faster = self.down_speed * 0.3
+        self.down_pressed = False
         self.timers = {
             'vertical move': Timer(UPDATE_START_SPEED, True, self.move_down),
             'horizontal move': Timer(MOVE_WAIT_TIME),
@@ -82,6 +85,16 @@ class Game:
             if keys[pygame.K_UP]:
                 self.tetromino.rotate()
                 self.timers['rotate'].activate()
+        #  down speedup
+        if not self.down_pressed and keys[pygame.K_DOWN]:
+            self.down_pressed = True
+            # print("pressing down")
+            self.timers['vertical move'].duration = self.down_speed_faster
+        
+        if self.down_pressed and not keys[pygame.K_DOWN]:
+            self.down_pressed = False
+            # print('releasing down key')
+            self.timers['vertical move'].duration = self.down_speed
     
     def check_finished_rows(self):
         #  get the full row indexes
@@ -200,10 +213,6 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = self.pos * CELL_SIZE)
     
     def rotate(self, pivot_pose):
-        # distance = self.pos - pivot_pose
-        # rotated = distance.rotate(90)
-        # new_pos = pivot_pose + rotated
-        # return new_pos
         return pivot_pose + (self.pos - pivot_pose).rotate(90)
 
     def horizontal_collide(self, x, field_data):

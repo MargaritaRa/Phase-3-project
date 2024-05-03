@@ -42,7 +42,7 @@ class Main:
             #Background fill color
             self.display_surface.fill(BACKGROUND)
             #Run the game.py settings
-            self.game.run()
+            self.game.run() 
             self.score.run()
             self.preview.run(self.next_shapes)
 
