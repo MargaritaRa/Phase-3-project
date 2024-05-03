@@ -3,7 +3,7 @@ from random import choice
 from timer import Timer
 
 class Game:
-    def __init__(self, get_new_shape):
+    def __init__(self, get_new_shape, update_score):
         self.surface = pygame.Surface((GAME_WIDTH, GAME_HEIGHT))
         self.display_surface = pygame.display.get_surface()
         self.rect = self.surface.get_rect(topleft = (PADDING, PADDING))
@@ -11,6 +11,7 @@ class Game:
 
         # game connection
         self.get_next_shape = get_new_shape
+        self.update_score = update_score
 
         #lines
         #let's make a copy of the surface that works on it's own
@@ -39,6 +40,21 @@ class Game:
             'rotate': Timer(ROTATE_WAIT_TIME )
         }
         self.timers['vertical move'].activate()
+
+        # score
+        self.current_level = 1
+        self.current_score = 0
+        self.current_lines = 0
+    
+    def calculate_score(self, num_lines):
+        self.current_lines += num_lines
+        self.current_score += SCORE_DATA[num_lines] * self.current_level
+
+        #  every 10 lines the level goes up by 1
+        if self.current_level / 10 > self.current_level:
+            self.current_level += 1
+        self.update_score(self.current_lines, self.current_score, self.current_level)
+
 
     def create_new_tetromino(self):
 
@@ -120,8 +136,9 @@ class Game:
             self.field_data = [[0 for x in range(COLUMNS)] for y in range(ROWS)]
             for block in self.sprites:
                 self.field_data[int(block.pos.y)][int(block.pos.x)] = block
+            #update score
+            self.calculate_score(len(delete_rows))
         
-
     def run(self):
         # update
         self.input()
