@@ -53,6 +53,9 @@ class Game:
         #  every 10 lines the level goes up by 1
         if self.current_level / 10 > self.current_level:
             self.current_level += 1
+            self.down_speed *= 0.75
+            self.down_speed_faster = self.down_speed * 0.3
+            self.timers['vertical move'].duration = self.down_speed
         self.update_score(self.current_lines, self.current_score, self.current_level)
 
 
