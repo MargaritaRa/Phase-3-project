@@ -1,4 +1,6 @@
 import pygame
+from colour import Color
+
 
 #Game size
 COLUMNS = 10
@@ -18,12 +20,14 @@ WINDOW_WIDTH = GAME_WIDTH + SIDEBAR_WIDTH + PADDING * 3
 WINDOW_HEIGHT = GAME_HEIGHT + PADDING * 2
 
 #game behavior
-UPDATE_START_SPEED = 800
+UPDATE_START_SPEED = 700
 MOVE_WAIT_TIME = 200
 ROTATE_WAIT_TIME = 200
 BLOCK_OFFSET =  pygame.Vector2(COLUMNS // 2, -1)
 
 #color
+red = Color("#d11836")
+colors = list(red.range_to(Color("#1fd118"),10))
 BACKGROUND = '#4d4d4d'
 LINE_WHITE = "#ffffff"
 BLACK = "#000000"
@@ -34,6 +38,7 @@ ORANGE = '#e89915'
 CYAN = '#43b4a4'
 GREEN = '#1fd118'
 RED = "#d11836"
+PINK = "#f262f1"
 
 #shapes
 TETROMINOS = {

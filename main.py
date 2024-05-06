@@ -1,6 +1,8 @@
 # from setting, import everything
 from setting import *
 from sys import exit
+import matplotlib.pyplot as plt
+import numpy as np
 
 #components
 from game import Game
@@ -45,7 +47,15 @@ class Main:
                     pygame.quit()
                     exit()
             #Background fill color
-            self.display_surface.fill(BACKGROUND)
+            # self.display_surface.fill((0, 0, 0))
+            gradient_colors = [(255, 255, 255), (242, 98, 241)] 
+            num_gradient_steps = WINDOW_HEIGHT  # Number of steps in the gradient
+            gradient_step = 1 / num_gradient_steps
+            
+            for i in range(num_gradient_steps):
+                color = tuple(int(gradient_colors[0][c] * (1 - gradient_step * i) + gradient_colors[1][c] * gradient_step * i) for c in range(3))
+                pygame.draw.rect(self.display_surface, color, (0, i, WINDOW_WIDTH, 1))
+
             #Run the game.py settings
             self.game.run() 
             self.score.run()

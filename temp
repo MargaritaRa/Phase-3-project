@@ -1,0 +1,25 @@
+# def run(self):
+#     while True:
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 pygame.quit()
+#                 exit()
+
+#         # Create a purple gradient
+#         gradient_colors = [(148, 0, 211), (75, 0, 130)]  # RGB values for purple gradient
+#         num_gradient_steps = WINDOW_HEIGHT  # Number of steps in the gradient
+#         gradient_step = 1 / num_gradient_steps
+
+#         # Fill the display surface with the gradient
+#         for i in range(num_gradient_steps):
+#             color = tuple(int(gradient_colors[0][c] * (1 - gradient_step * i) + gradient_colors[1][c] * gradient_step * i) for c in range(3))
+#             pygame.draw.rect(self.display_surface, color, (0, i, WINDOW_WIDTH, 1))
+
+#         # Run the game.py settings
+#         self.game.run() 
+#         self.score.run()
+#         self.preview.run(self.next_shapes)
+
+#         pygame.display.update()
+#         self.clock.tick(FP
+

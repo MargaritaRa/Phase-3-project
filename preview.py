@@ -1,6 +1,8 @@
 from setting import *
 from pygame.image import load
 from os import path
+import matplotlib.pyplot as plt
+import numpy as np
 
 class Preview:
     def __init__(self):
@@ -26,6 +28,14 @@ class Preview:
 
     def run(self, next_shapes):
         self.surface.fill(BACKGROUND)
+        # gradient_colors = [(255, 255, 255), (242, 98, 241)] 
+        # num_gradient_steps = WINDOW_HEIGHT  # Number of steps in the gradient
+        # gradient_step = 1 / num_gradient_steps
+            
+        # for i in range(num_gradient_steps):
+        #     color = tuple(int(gradient_colors[0][c] * (1 - gradient_step * i) + gradient_colors[1][c] * gradient_step * i) for c in range(3))
+        #     pygame.draw.rect(self.display_surface, color, (0, i, WINDOW_WIDTH, 1))
+
         self.display_pieces(next_shapes)
         self.display_surface.blit(self.surface, self.rect)
         pygame.draw.rect(self.display_surface, LINE_WHITE, self.rect, 2, 2)

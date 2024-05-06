@@ -2,6 +2,7 @@ from setting import *
 from random import choice
 from timer import Timer
 
+
 class Game:
     def __init__(self, get_new_shape, update_score):
         self.surface = pygame.Surface((GAME_WIDTH, GAME_HEIGHT))
@@ -51,7 +52,7 @@ class Game:
         self.current_score += SCORE_DATA[num_lines] * self.current_level
 
         #  every 10 lines the level goes up by 1
-        if self.current_level / 10 > self.current_level:
+        if self.current_lines / 10 > self.current_level:
             self.current_level += 1
             self.down_speed *= 0.75
             self.down_speed_faster = self.down_speed * 0.3
